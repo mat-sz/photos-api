@@ -16,6 +16,8 @@ npx sequelize-cli db:seed:all
 
 This will generate an user with the following details:
 
+|          |      |
+|----------|------|
 | Username | test |
 | Password | test |
 
