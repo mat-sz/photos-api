@@ -1,0 +1,8 @@
+module.exports = async (req, res, next) => {
+    if (req.authenticated && req.user.superuser)
+        return next();
+
+    let error = new Error('Authentication required.');
+    error.status = 403;
+    return next(error);
+};

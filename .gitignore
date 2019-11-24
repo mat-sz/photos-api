@@ -1,0 +1,8 @@
+node_modules
+yarn-error.log
+npm-error.log
+*.sqlite
+
+/storage/*
+/public/*
+!/public/.THE_REACT_APP_GOES_HERE
