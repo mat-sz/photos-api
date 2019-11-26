@@ -4,11 +4,7 @@ const config = require('../configs/app');
 const hashids = new Hashids(config.hashidSalt);
 
 module.exports = (sequelize, DataTypes) => {
-    const Photo = sequelize.define('photo', {
-        filename: DataTypes.STRING,
-        thumbnailFilename: DataTypes.STRING,
-        mimetype: DataTypes.STRING,
-        thumbnailMimetype: DataTypes.STRING,
+    const Album = sequelize.define('album', {
         title: DataTypes.STRING,
         private: DataTypes.BOOLEAN,
     }, {
@@ -20,31 +16,21 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
   
-    Photo.associate = (models) => {
-        models.Photo.belongsTo(models.User, {
+    Album.associate = (models) => {
+        models.Album.belongsTo(models.User, {
             onDelete: "CASCADE",
             foreignKey: {
                 allowNull: true,
             },
         });
-        models.Photo.belongsTo(models.Album, {
-            onDelete: "SET NULL",
-            foreignKey: {
-                allowNull: true,
-            },
-        });
+        models.Album.hasMany(models.Photo);
     };
 
-    Photo.prototype.toJSON = () => {
+    Album.prototype.toJSON = () => {
         let values = Object.assign({}, this.get());
-      
         values.id = hashids.encode(values.id);
-        values.key = values.filename;
-        delete values.filename;
-        delete values.thumbnailFilename;
-
         return values;
     };
 
-    return Photo;
+    return Album;
 };

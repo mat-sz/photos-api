@@ -51,6 +51,7 @@ module.exports = {
             },
             albumId: {
                 type: Sequelize.INTEGER,
+                onDelete: "SET NULL",
                 allowNull: true,
                 references: {
                     model: 'albums',

@@ -11,6 +11,10 @@ module.exports = {
                 allowNull: true,
                 type: Sequelize.STRING
             },
+            key: {
+                allowNull: true,
+                type: Sequelize.STRING
+            },
             private: {
                 allowNull: false,
                 defaultValue: true,

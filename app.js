@@ -7,6 +7,7 @@ const userMiddleware = require('./middlewares/user');
 
 const users = require('./routes/users');
 const photos = require('./routes/photos');
+const albums = require('./routes/albums');
 const auth = require('./routes/auth');
 
 // Makes testing the React app easier.
@@ -26,6 +27,7 @@ app.use(userMiddleware);
 
 app.use('/v1/users', users);
 app.use('/v1/photos', photos);
+app.use('/v1/albums', albums);
 app.use('/v1/auth', auth);
 app.use(express.static('public'));
 
