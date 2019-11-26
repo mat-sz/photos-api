@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
         });
     };
 
-    Photo.prototype.toJSON = () => {
+    Photo.prototype.toJSON = function () {
         let values = Object.assign({}, this.get());
       
         values.id = hashids.encode(values.id);

@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         models.Album.hasMany(models.Photo);
     };
 
-    Album.prototype.toJSON = () => {
+    Album.prototype.toJSON = function () {
         let values = Object.assign({}, this.get());
         values.id = hashids.encode(values.id);
         return values;

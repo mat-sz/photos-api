@@ -15,11 +15,11 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
     
-    User.prototype.comparePassword = (password) => {
+    User.prototype.comparePassword = function (password) {
         return bcrypt.compare(password, this.password);
     };
 
-    User.prototype.toJSON = () => {
+    User.prototype.toJSON = function () {
         let values = Object.assign({}, this.get());
       
         delete values.password;
