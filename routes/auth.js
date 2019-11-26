@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
+const config = require('../configs/app');
 const { User, Token } = require('../models');
 const isAuthenticated = require('../middlewares/isAuthenticated');
 
@@ -51,8 +52,22 @@ router.get('/sessions', isAuthenticated, async (req, res, next) => {
     res.json(tokens);
 });
 
-router.post('/signup', (req, res, next) => {
-    // TODO: sign up
+router.post('/signup', async (req, res, next) => {
+    if (!config.allowSignups)
+        return next(new Error('Signups are not allowed.'));
+
+    if (!req.body['username'] || !req.body['password'])
+        return next(new Error('Not enough parameters.'));
+    
+    if ((await User.findAll({ where: { username: req.body.username }})).length > 0)
+        return next(new Error('This username is already taken.'));
+    
+    const user = await User.create({
+        username: req.body['username'],
+        password: req.body['password'],
+    });
+
+    res.json(user);
 });
 
 router.post('/password', isAuthenticated, async (req, res, next) => {

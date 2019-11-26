@@ -46,7 +46,7 @@ router.post('/:id/photos', isAuthenticated, albumMiddleware(true), async (req, r
     
     if (req.body['photos'] && Array.isArray(req.body['photos'])) {
         let photoIds = req.body['photos'].map((id) => hashids.decode(id));
-        photos = Photo.where({ id: photoIds, userId: req.user.id });
+        photos = Photo.findAll({ where: { id: photoIds, userId: req.user.id }});
     }
 
     await req.album.setPhotos(photos);
