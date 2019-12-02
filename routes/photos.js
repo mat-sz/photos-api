@@ -22,6 +22,7 @@ const upload = multer({ dest: destination });
 
 const { Photo } = require('../models');
 const isAuthenticated = require('../middlewares/isAuthenticated');
+const isAuthenticatedConditional = require('../middlewares/isAuthenticatedConditional');
 
 const photoMiddleware = (viewing = false) => async (req, res, next) => {
     const id = hashids.decode(req.params['id']);
@@ -48,7 +49,7 @@ router.get('/', isAuthenticated, async (req, res, next) => {
     res.json(photos);
 });
 
-router.post('/', isAuthenticated, upload.fields([
+router.post('/', isAuthenticatedConditional(!config.allowAnonymousUploads), upload.fields([
     { name: 'full', maxCount: 1 },
     { name: 'thumbnail', maxCount: 1 },
 ]), async (req, res, next) => {
@@ -58,9 +59,9 @@ router.post('/', isAuthenticated, upload.fields([
         return next(new Error('Thumbnail file missing.'));
     
     const photo = await Photo.create({
-        userId: req.user.id,
+        userId: (req.user) ? req.user.id : null,
         title: req.body.title,
-        private: +req.body.private,
+        private: (req.user) ? +req.body.private : false,
         filename: req.files['full'][0].filename,
         mimetype: req.files['full'][0].mimetype,
         thumbnailFilename: req.files['thumbnail'][0].filename,

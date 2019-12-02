@@ -1,4 +1,4 @@
-module.exports = async (req, res, next) => {
+module.exports = (req, res, next) => {
     if (req.authenticated)
         return next();
 
