@@ -5,6 +5,7 @@ const env = process.env.NODE_ENV || 'development';
 
 const userMiddleware = require('./middlewares/user');
 
+const instance = require('./routes/instance');
 const users = require('./routes/users');
 const photos = require('./routes/photos');
 const albums = require('./routes/albums');
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(userMiddleware);
 
+app.use('/v1/instance', instance);
 app.use('/v1/users', users);
 app.use('/v1/photos', photos);
 app.use('/v1/albums', albums);
