@@ -14,12 +14,12 @@ router.post('/', isSuperuser, async (req, res, next) => {
 });
 
 router.get('/:id', isSuperuser, async (req, res, next) => {
-    const user = await User.findByPk(req.param('id'));
+    const user = await User.findByPk(req.params['id']);
     req.json(user);
 });
 
 router.post('/:id', isSuperuser, async (req, res, next) => {
-    const user = await User.findByPk(req.param('id'));
+    const user = await User.findByPk(req.params['id']);
     
     if (req.body.hasOwnProperty('username'))
         user.username = req.body.username;

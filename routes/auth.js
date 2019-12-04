@@ -35,7 +35,7 @@ router.post('/', async (req, res, next) => {
 });
 
 router.delete('/:token?', isAuthenticated, async (req, res, next) => {
-    const authorization = req.param('token') || req.header('authorization');
+    const authorization = req.params['token'] || req.header('authorization');
     const token = await Token.findByPk(authorization);
 
     token.active = false;
