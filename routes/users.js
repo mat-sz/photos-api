@@ -5,17 +5,26 @@ const { User } = require('../models');
 const isSuperuser = require('../middlewares/isSuperuser');
 
 router.get('/', isSuperuser, async (req, res, next) => {
-    req.json(await User.findAll());
+    req.json({
+        success: true,
+        data: await User.findAll(),
+    });
 });
 
 router.post('/', isSuperuser, async (req, res, next) => {
     const user = await User.create(req.body);
-    req.json(user);
+    req.json({
+        success: true,
+        data: user,
+    });
 });
 
 router.get('/:id', isSuperuser, async (req, res, next) => {
     const user = await User.findByPk(req.params['id']);
-    req.json(user);
+    req.json({
+        success: true,
+        data: user,
+    });
 });
 
 router.post('/:id', isSuperuser, async (req, res, next) => {
@@ -29,7 +38,10 @@ router.post('/:id', isSuperuser, async (req, res, next) => {
         user.superuser = +req.body.superuser;
 
     user.save();
-    req.json(user);
+    req.json({
+        success: true,
+        data: user,
+    });
 });
 
 router.delete('/:id', isSuperuser, async (req, res, next) => {

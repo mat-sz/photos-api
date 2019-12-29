@@ -46,7 +46,10 @@ const photoMiddleware = (viewing = false) => async (req, res, next) => {
 router.get('/', isAuthenticated, async (req, res, next) => {
     const photos = await req.user.getPhotos();
     
-    res.json(photos);
+    res.json({
+        success: true,
+        data: photos,
+    });
 });
 
 router.post('/', isAuthenticatedConditional(!config.allowAnonymousUploads), upload.fields([
@@ -68,11 +71,17 @@ router.post('/', isAuthenticatedConditional(!config.allowAnonymousUploads), uplo
         thumbnailMimetype: req.files['thumbnail'][0].mimetype,
     });
 
-    res.json(photo);
+    res.json({
+        success: true,
+        data: photo,
+    });
 });
 
 router.get('/:id', photoMiddleware(true), (req, res, next) => {
-    res.json(req.photo);
+    res.json({
+        success: true,
+        data: req.photo,
+    });
 });
 
 router.post('/:id', isAuthenticated, photoMiddleware(false), async (req, res, next) => {
@@ -82,7 +91,10 @@ router.post('/:id', isAuthenticated, photoMiddleware(false), async (req, res, ne
         req.photo.title = req.body.title;
 
     await req.photo.save();
-    res.json(req.photo);
+    res.json({
+        success: true,
+        data: req.photo,
+    });
 });
 
 router.get('/:id/file/:size', photoMiddleware(true), (req, res, next) => {
@@ -111,7 +123,10 @@ router.post('/:id/file/:size', isAuthenticated, photoMiddleware(false), upload.s
     }
 
     await req.photo.save();
-    req.json(req.photo);
+    req.json({
+        success: true,
+        data: req.photo,
+    });
 });
 
 router.delete('/:id', isAuthenticated, photoMiddleware(false), async (req, res, next) => {

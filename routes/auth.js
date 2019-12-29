@@ -7,8 +7,8 @@ const isAuthenticated = require('../middlewares/isAuthenticated');
 
 router.get('/', (req, res, next) => {
     res.json({
-        authenticated: req.authenticated,
-        user: req.user,
+        success: true,
+        data: req.user,
     });
 });
 
@@ -30,7 +30,7 @@ router.post('/', async (req, res, next) => {
 
     res.json({
         success: true,
-        token: token.id,
+        data: token.id,
     });
 });
 
@@ -49,7 +49,10 @@ router.delete('/:token?', isAuthenticated, async (req, res, next) => {
 router.get('/sessions', isAuthenticated, async (req, res, next) => {
     const tokens = await req.user.getTokens();
 
-    res.json(tokens);
+    res.json({
+        success: true,
+        data: tokens,
+    });
 });
 
 router.post('/signup', async (req, res, next) => {
@@ -67,7 +70,10 @@ router.post('/signup', async (req, res, next) => {
         password: req.body['password'],
     });
 
-    res.json(user);
+    res.json({
+        success: true,
+        data: user,
+    });
 });
 
 router.post('/password', isAuthenticated, async (req, res, next) => {
