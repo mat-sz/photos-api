@@ -13,8 +13,6 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-    console.log(req.body);
-    
     if (!req.body.username || !req.body.password)
         return next(new Error("Username or password is incorrect."));
 
