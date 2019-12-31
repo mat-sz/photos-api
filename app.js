@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const env = process.env.NODE_ENV || 'development';
+const cors = require('cors');
 
 const userMiddleware = require('./middlewares/user');
 
@@ -11,17 +12,7 @@ const photos = require('./routes/photos');
 const albums = require('./routes/albums');
 const auth = require('./routes/auth');
 
-// Makes testing the React app easier.
-if (env === 'development') {
-    try {
-        const cors = require('cors');
-        app.use(cors());
-        console.log('CORS enabled');
-    } catch (e) {
-        console.log('Development env, devDependencies probably not installed.');
-    }
-}
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(userMiddleware);
