@@ -4,6 +4,14 @@ API for my photo storage system.
 
 **This app is not ready for production deployment yet.**
 
+## Environment variables
+
+| Variable      | Default value | Description                                                    |
+|---------------|---------------|----------------------------------------------------------------|
+| `IP`          | `127.0.0.1`   | IP address to bind to.                                         |
+| `PORT`        | `4000`        | Port to bind to.                                               |
+| `HASHID_SALT` | `salt`        | Salt for hashids, **make sure to set it to something unique.** |
+
 ## Installation
 
 Run the following commands:

@@ -1,5 +1,5 @@
 module.exports = {
-    hashidSalt: 'test', // TODO: use env for that
+    hashidSalt: process.env.HASHID_SALT || 'salt',
     allowSignups: true,
     allowAnonymousUploads: false,
     title: 'Photos',
