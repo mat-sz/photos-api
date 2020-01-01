@@ -6,6 +6,8 @@ API for my photo storage system.
 
 ## Environment variables
 
+You can also create a `.env` file.
+
 | Variable      | Default value | Description                                                    |
 |---------------|---------------|----------------------------------------------------------------|
 | `IP`          | `127.0.0.1`   | IP address to bind to.                                         |

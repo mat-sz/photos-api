@@ -6,3 +6,4 @@ npm-error.log
 /storage/*
 /public/*
 !/public/.THE_REACT_APP_GOES_HERE
+.env
