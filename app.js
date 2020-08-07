@@ -25,19 +25,19 @@ app.use('/v1/auth', auth);
 app.use(express.static('public'));
 
 app.use((req, res, next) => {
-    let err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+  let err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.json({
-        success: false,
-        error: {
-            message: err.message,
-        }
-    });
+  res.status(err.status || 500);
+  res.json({
+    success: false,
+    error: {
+      message: err.message,
+    },
+  });
 });
 
 module.exports = app;

@@ -9,7 +9,7 @@ API for my photo storage system.
 You can also create a `.env` file.
 
 | Variable      | Default value | Description                                                    |
-|---------------|---------------|----------------------------------------------------------------|
+| ------------- | ------------- | -------------------------------------------------------------- |
 | `IP`          | `127.0.0.1`   | IP address to bind to.                                         |
 | `PORT`        | `4000`        | Port to bind to.                                               |
 | `HASHID_SALT` | `salt`        | Salt for hashids, **make sure to set it to something unique.** |
@@ -27,7 +27,7 @@ npx sequelize-cli db:seed:all
 This will generate an user with the following details:
 
 |          |      |
-|----------|------|
+| -------- | ---- |
 | Username | test |
 | Password | test |
 
